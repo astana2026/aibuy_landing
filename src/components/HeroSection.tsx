@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Bot, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function HeroSection() {
+    const t = useTranslations('Hero');
+
     return (
         <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Background Gradients */}
@@ -20,7 +23,7 @@ export default function HeroSection() {
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border border-primary-500/30 text-primary-400 text-sm font-medium"
                 >
                     <Bot size={16} />
-                    <span>Студия детейлинга на автопилоте</span>
+                    <span>{t('badge')}</span>
                 </motion.div>
 
                 <motion.h1
@@ -29,9 +32,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.5, delay: 0.1 }}
                     className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-8"
                 >
-                    <span className="text-foreground">Агент автодетейлинга на базе </span>
-                    <br className="hidden sm:block" />
-                    <span className="text-gradient">Искусственного Интеллекта</span>
+                    <span className="text-gradient leading-tight">{t('agentTitle')}</span>
                 </motion.h1>
 
                 <motion.p
@@ -40,8 +41,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-2xl mx-auto text-lg sm:text-xl text-neutral-400 mb-10 leading-relaxed"
                 >
-                    Удерживайте вечерних клиентов. Исключите пустые слоты. Без найма,
-                    обучения и контроля менеджеров. Работает 24/7.
+                    {t('subheadline')}
                 </motion.p>
 
                 <motion.div
@@ -51,13 +51,10 @@ export default function HeroSection() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <button className="w-full sm:w-auto px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 shadow-[0_0_30px_rgba(37,99,235,0.3)]">
-                        Внедрить бесплатно
+                        {t('cta')}
                         <ArrowRight size={20} />
                     </button>
 
-                    <button className="w-full sm:w-auto px-8 py-4 glass hover:bg-white/5 text-white rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300">
-                        Смотреть демо
-                    </button>
                 </motion.div>
 
                 <motion.div
@@ -68,11 +65,11 @@ export default function HeroSection() {
                 >
                     <div className="flex items-center gap-2">
                         <Zap size={16} className="text-primary-500" />
-                        <span>Запуск за 1 день</span>
+                        <span>{t('speedMetric')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <ShieldCheck size={16} className="text-primary-500" />
-                        <span>10 сек скорость ответа</span>
+                        <span>{t('availabilityMetric')}</span>
                     </div>
                 </motion.div>
             </div>

@@ -1,17 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-const chatMessages = [
-    { sender: 'client', text: 'Здравствуйте, сколько стоит полировка BMW 5 серии?', time: '19:47' },
-    { sender: 'ai', text: 'Добрый вечер! BMW 5 — отличный выбор. Цена зависит от состояния лака. Пришлите фото кузова — я назову точную цену за 1 минуту.', time: '19:47' },
-    { sender: 'client', text: 'Вложил фото двери и капота 📸', time: '19:48' },
-    { sender: 'ai', text: 'Посмотрел фото. На двери потертость, на капоте мелкие царапины. Рекомендую двухфазную полировку. Цена: от 80 000₸. Время: 6–8 часов. На когда удобно записать? Я передам детали мастеру.', time: '19:48' },
-    { sender: 'client', text: 'Давайте на субботу утро', time: '19:49' },
-    { sender: 'ai', text: 'Записал на субботу утро! Завтра отправлю подтверждение. Если планы изменятся — напишите, найдем другое время. До встречи!', time: '19:49' },
-];
+import { useTranslations } from 'next-intl';
 
 export default function SolutionSection() {
+    const t = useTranslations('Solution');
+    const features = t.raw('features') as Array<{ title: string, desc: string }>;
+
+    const chatMessages = [
+        { sender: 'client', text: t('chat.msg1'), time: t('chat.msg1time') },
+        { sender: 'ai', text: t('chat.msg2'), time: t('chat.msg2time') },
+        { sender: 'client', text: t('chat.msg3'), time: t('chat.msg3time') },
+        { sender: 'ai', text: t('chat.msg4'), time: t('chat.msg4time') },
+        { sender: 'client', text: t('chat.msg5'), time: t('chat.msg5time') },
+        { sender: 'ai', text: t('chat.msg6'), time: t('chat.msg6time') },
+    ];
+
     return (
         <section className="py-24 relative overflow-hidden bg-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -23,21 +27,18 @@ export default function SolutionSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                            <span className="text-gradient">AI-СОТРУДНИК</span> <br />
-                            вашей студии
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6 uppercase tracking-tight">
+                            <span className="text-gradient leading-tight">{t('title1')}</span> <br />
+                            <span className="text-foreground">{t('title2')}</span>
                         </h2>
-                        <p className="text-neutral-400 text-lg mb-8 leading-relaxed">
-                            Он не просто отвечает — он выявляет потребности, консультирует по фото и доводит до записи. Мастер получает готовую карточку со всеми деталями.
-                        </p>
 
-                        <ul className="space-y-4 mb-10">
-                            {['Отвечает за 10 секунд', 'Анализирует фото повреждений', 'Записывает марку, состояние, пожелания', 'Работает 24/7 без выходных'].map((feature, idx) => (
+                        <ul className="space-y-4 mb-10 mt-8">
+                            {features.map((feature, idx) => (
                                 <li key={idx} className="flex items-center gap-3 text-neutral-300">
-                                    <div className="w-6 h-6 rounded-full bg-primary-600/20 flex items-center justify-center">
+                                    <div className="w-6 h-6 rounded-full bg-primary-600/20 flex items-center justify-center shrink-0">
                                         <div className="w-2 h-2 rounded-full bg-primary-500" />
                                     </div>
-                                    {feature}
+                                    <span className="font-medium text-lg text-neutral-200">{feature.title}</span>
                                 </li>
                             ))}
                         </ul>
@@ -60,7 +61,7 @@ export default function SolutionSection() {
                                         AI
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-white">Агент AIBUY</h4>
+                                        <h4 className="font-semibold text-white">AIBUY</h4>
                                         <p className="text-xs text-primary-400">Онлайн</p>
                                     </div>
                                 </div>
@@ -78,8 +79,8 @@ export default function SolutionSection() {
                                     >
                                         <div
                                             className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.sender === 'client'
-                                                    ? 'bg-neutral-800 text-neutral-200 rounded-br-sm'
-                                                    : 'bg-primary-600 text-white rounded-bl-sm'
+                                                ? 'bg-neutral-800 text-neutral-200 rounded-br-sm'
+                                                : 'bg-primary-600 text-white rounded-bl-sm'
                                                 }`}
                                         >
                                             <p className="text-sm leading-relaxed">{msg.text}</p>
